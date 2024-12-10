@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { FaUserCircle, FaRobot } from "react-icons/fa";
 import axios from "axios";
 import { MdOutlineSelfImprovement } from "react-icons/md";
-
+import { Api } from "../../Api/Api";
 
 export default function ChatPage() {
   const [messages, setMessages] = useState([]); // Chat messages state
   const [input, setInput] = useState(""); // Input field state
 
-  // Fetch messages from the API when the component loads
+  // Fetch initial messages from the API when the component loads
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -30,17 +30,26 @@ export default function ChatPage() {
       // Send user message to API
       await axios.post(`${Api}/chat/sendMessage`, { Message: input });
 
-      // Update the UI with new message
+      // Update the UI with new user message
       setMessages([...messages, { text: input, sender: "user" }]);
       setInput("");
 
-      // Simulate bot response
-      setTimeout(() => {
-        setMessages((prevMessages) => [
-          ...prevMessages,
-          { text: "I'm here to help!", sender: "bot" },
-        ]);
-      }, 1000);
+      // Fetch bot's response after sending the message
+      const fetchBotResponse = async () => {
+        try {
+          const response = await axios.get(`${Api}/chat/getBotResponse`);
+          // Update UI with bot response
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: response.data.message, sender: "bot" },
+          ]);
+        } catch (error) {
+          console.log("Error fetching bot response: ", error);
+        }
+      };
+
+      fetchBotResponse(); // Fetch bot's response after the user message
+
     } catch (error) {
       console.log("Error sending message: ", error);
     }
@@ -55,9 +64,9 @@ export default function ChatPage() {
 
   return (
     <div className="bg-[#ffffff]">
-      <div className="flex justify-center text-4xl font-serif mb-5 mt-5 font-extrabold items-center">
-        <MdOutlineSelfImprovement className="text-8xl text-[#bfaeae]" />
-        <div className="">
+      <div className="flex justify-center font-serif mb-5 mt-5 font-extrabold items-center flex-row max-sm:flex-col">
+        <MdOutlineSelfImprovement className="text-8xl text-[#bfaeae] " />
+        <div className="text-4xl max-sm:text-xl max-sm:justify-center max-sm:flex">
           I am here to listen and support you
           <br />
           let’s start whenever you’re ready.
@@ -98,7 +107,6 @@ export default function ChatPage() {
           ))}
         </div>
 
- 
         {/* Input Section */}
         <div className="flex p-4 flex-row max-lg:flex-col border-t bg-[#fffcfc]">
           <input
@@ -120,4 +128,3 @@ export default function ChatPage() {
     </div>
   );
 }
-
