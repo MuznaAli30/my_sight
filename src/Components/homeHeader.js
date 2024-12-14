@@ -1,16 +1,25 @@
 import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function ChatHeader() {
+export default function HomeHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   // Toggle dropdown visibility (optional if you need a toggle effect)
   const toggleDropdown = () => setIsOpen(!isOpen);
 
+  const navigate = useNavigate()
+
+  const navigateToChatPage = (e) => {
+    e.preventDefault()
+    console.log("chatPage")
+    navigate('/chatPage')
+  }
+
   return (
     <>
-      <div className="flex flex-row justify-around items-center p-4 bg-[#ddcccc] max-lg:hidden">
+      <div className="flex flex-row justify-around items-center p-4 bg-[#d5c5c5] max-lg:hidden">
         <Link to={"/"}>
           <div className="flex flex-row items-center space-x-2">
             <div className="font-caveat font-semibold text-3xl">MY</div>
@@ -34,8 +43,8 @@ export default function ChatHeader() {
           </Link>
         </div>
         <div>
-          <button className="ml-2 px-4 py-2 max-lg:ml-0 max-lg:mt-5 bg-[#fdf5f5] text-black font-serif rounded-lg hover:bg-[#eee6e6] duration-300 text-xl">
-            Camera
+          <button onClick={navigateToChatPage} className="ml-2 px-4 py-2 max-lg:ml-0 max-lg:mt-5 bg-[#fdf5f5] text-black font-serif rounded-lg hover:bg-[#eee6e6] duration-300 text-xl">
+            CHAT
           </button>
         </div>
       </div>
@@ -74,8 +83,8 @@ export default function ChatHeader() {
             <Link className="block px-4 py-2 hover:bg-[#d5c5c5] cursor-pointer">
               CONTACT
             </Link>
-            <Link className="block px-4 py-2 hover:bg-[#d5c5c5] cursor-pointer">
-              CAMERA
+            <Link to={"/chatPage"} className="block px-4 py-2 hover:bg-[#d5c5c5] cursor-pointer">
+              CHAT
             </Link>
           </div>
         </div>
