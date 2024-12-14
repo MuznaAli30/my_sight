@@ -100,14 +100,14 @@ export default function ChatPage() {
               {comment.body && (
                 <p
                   className={`${
-                    comment.body ? "bg-[#d5c5c5] text-lg px-4 py-2" : "p-0"
+                    comment.body ? "bg-[#f8f1f1] text-lg font-mono px-4 py-2" : "p-0"
                   } rounded-lg w-fit max-w-[75%]`}
                 >
                   {comment.body}
                 </p>
               )}
               {comment.userId && (
-                <FaUserCircle className="text-2xl text-gray-400 ml-2" />
+                <FaUserCircle className="text-2xl ml-2" />
               )}
             </div>
           ))}
@@ -121,12 +121,12 @@ export default function ChatPage() {
               }`}
             >
               {comment.userId && (
-                <FaRobot className="text-2xl text-gray-400 mr-2" />
+                <FaRobot className="text-2xl mr-2" />
               )}
               {comment.body && (
                 <p
                   className={`${
-                    comment.body ? "bg-[#d5c5c5] text-lg px-4 py-2" : "p-0"
+                    comment.body ? "bg-[#f8f1f1] text-lg font-mono px-4 py-2" : "p-0"
                   } rounded-lg w-fit max-w-[75%]`}
                 >
                   {comment.title}
