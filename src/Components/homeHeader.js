@@ -9,17 +9,17 @@ export default function HomeHeader() {
   // Toggle dropdown visibility (optional if you need a toggle effect)
   const toggleDropdown = () => setIsOpen(!isOpen);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const navigateToChatPage = (e) => {
-    e.preventDefault()
-    console.log("chatPage")
-    navigate('/chatPage')
-  }
+    e.preventDefault();
+    console.log("chatPage");
+    navigate("/chatPage");
+  };
 
   return (
     <>
-      <div className="flex flex-row justify-around items-center p-4 bg-[#d5c5c5] max-lg:hidden">
+      <div className="flex flex-row justify-around items-center p-4 bg-transparent max-lg:hidden">
         <Link to={"/"}>
           <div className="flex flex-row items-center space-x-2">
             <div className="font-caveat font-semibold text-3xl">MY</div>
@@ -32,7 +32,10 @@ export default function HomeHeader() {
           </div>
         </Link>
         <div className="flex items-center justify-center flex-row space-x-7 font-mono text-xl">
-          <Link to={"/"} className="cursor-pointer hover:scale-x-125 duration-500 hover:font-thin">
+          <Link
+            to={"/"}
+            className="cursor-pointer hover:scale-x-125 duration-500 hover:font-thin"
+          >
             HOME
           </Link>
           <Link className="cursor-pointer hover:scale-x-125 duration-500 hover:font-thin">
@@ -41,11 +44,12 @@ export default function HomeHeader() {
           <Link className="cursor-pointer hover:scale-x-125 duration-500 hover:font-thin">
             CONTACT
           </Link>
-        </div>
-        <div>
-          <button onClick={navigateToChatPage} className="ml-2 px-4 py-2 max-lg:ml-0 max-lg:mt-5 bg-[#fdf5f5] text-black font-serif rounded-lg hover:bg-[#eee6e6] duration-300 text-xl">
-            CHAT
-          </button>
+          <Link
+            onClick={navigateToChatPage}
+            className="cursor-pointer hover:scale-x-125 duration-500 hover:font-thin"
+          >
+            CHAT PAGE
+          </Link>
         </div>
       </div>
 
@@ -74,7 +78,10 @@ export default function HomeHeader() {
 
           {/* Dropdown Menu */}
           <div className="absolute right-0 mt-1 mr-2 w-48 bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300">
-            <Link to={"/"} className="block px-4 py-2 hover:bg-[#d5c5c5] cursor-pointer">
+            <Link
+              to={"/"}
+              className="block px-4 py-2 hover:bg-[#d5c5c5] cursor-pointer"
+            >
               HOME
             </Link>
             <Link className="block px-4 py-2 hover:bg-[#d5c5c5] cursor-pointer">
@@ -83,7 +90,10 @@ export default function HomeHeader() {
             <Link className="block px-4 py-2 hover:bg-[#d5c5c5] cursor-pointer">
               CONTACT
             </Link>
-            <Link to={"/chatPage"} className="block px-4 py-2 hover:bg-[#d5c5c5] cursor-pointer">
+            <Link
+              to={"/chatPage"}
+              className="block px-4 py-2 hover:bg-[#d5c5c5] cursor-pointer"
+            >
               CHAT
             </Link>
           </div>
